@@ -4,11 +4,12 @@ class MapConfigRepository extends BaseRepository {
   constructor(session) {
     super('map_config', session);
     this._tableName = 'map_config';
-    this._knex = session.getDB();
+    this._session = session;
   }
 
   async create(object) {
-    return this._knex('tableName')
+    return this._session
+      .getDB()(this._tableName)
       .insert(object)
       .onConflict('organization_id')
       .merge({

@@ -17,7 +17,7 @@ const organizationThemeGetHandler = async (req, res) => {
   const result = await mapConfigService.getMapConfigs({ organization_id });
 
   if (result.length === 0) {
-    throw new HttpError('Not Found');
+    throw new HttpError(404, 'Not Found');
   }
 
   res.status(200).json(result[0]);
